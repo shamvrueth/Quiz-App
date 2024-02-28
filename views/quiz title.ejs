@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz</title>
+  <link rel="stylesheet" href="/styles/quiz title.css">
+</head>
+<body id="app">
+    <form class="container" action="/title" method="post">
+        <h1 id="countryName">
+            Quiz title
+        </h1>
+        <div class="answer-container">
+            <input type="text" name="title" id="userInput" placeholder="<%= locals.error?error:'Enter the title' %>" autofocus autocomplete="off">
+      
+        </div>
+        <button type="submit">SUBMIT</button>
+      
+    </form>
+</body>
+</html>

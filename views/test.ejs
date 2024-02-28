@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="styles/test.css">
+</head>
+<body>
+    <div class="app">
+        <h1>Question <%= qno %></h1>
+        <div class="quiz">
+            <h2 id="question"><%= question %></h2>
+            <div id="options">
+                <form action="/chosenOption" method="post">
+                    <button class="btn" name="chosenOption" type="submit" value="<%= options[0] %>" onclick="selectAnswer(this)"><%= options[0] %></button>
+                    <button class="btn" name="chosenOption" type="submit" value="<%= options[1] %>" onclick="selectAnswer(this)"><%= options[1] %></button>
+                    <button class="btn" name="chosenOption" type="submit" value="<%= options[2] %>" onclick="selectAnswer(this)"><%= options[2] %></button>
+                    <button class="btn" name="chosenOption" type="submit" value="<%= options[3] %>" onclick="selectAnswer(this)"><%= options[3] %></button>
+                </form>
+            </div>
+            <form action="/nextque" method="/get">
+                <button id="next-question" type="submit" name="chosenOption">Next</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        // const questionElement = document.getElementById("question");
+        // const answerButton = document.getElementById("options");
+        // const nextButton = document.getElementById("next-question");
+
+        // let currentQuestionIndex = 0;
+        // let score = 0;
+        function selectAnswer(button){
+            document.getElementById("next-question").style.display="block";
+            var buttons = document.getElementsByClassName("btn");
+            for (var i=0;i<buttons.length;i++){
+                buttons[i].classList.remove("chosen");
+            }
+            button.classList.add("chosen");
+        }
+    </script>
+</body>
+</html>

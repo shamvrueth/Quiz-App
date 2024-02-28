@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <title>Quiz</title>
+</head>
+
+<body>
+  <main>
+
+    <div class="box" id="heading">
+      <h1>
+        Question <%= qno %>
+      </h1>
+    </div>
+    <div class="box">
+      <% for(let option of options){%>
+        <div class="item">
+          <form action="/answer" method="post">
+            <input type="radio" onchange="this.form.submit()" name="answer" value="<%= option.opt %>">
+          </form>
+          <p id="title<%= options.indexOf(option) %>">
+            <%= option.opt %>
+          </p>
+          <form class="edit" action="/edit" method="post">
+            <input type="hidden" autocomplete="off" autofocus="true" name="index" value="<%= options.indexOf(option) %>">
+            <input id="input<%= options.indexOf(option) %>" type="text" autocomplete="off"
+              autofocus="true" hidden="true" name="updatedOption"/>
+            <button id="done<%= options.indexOf(option) %>" class="edit" type="submit" hidden><img class="icon"
+                src="/assets/icons/check-solid.svg" alt="tick image"></button>
+          </form>
+          <button id="edit<%= options.indexOf(option) %>" class="edit" onclick="handler('<%=options.indexOf(option)%>')"><img class="icon"
+              src="/assets/icons/pencil-solid.svg" alt="pencil image">
+          </button>
+     </div>
+      <% } %>
+      <form class="item" action="/next" method="post">
+        <input type="text" name="newItem" placeholder="<%= locals.error ? error: 'Enter the question after editing options'%>" autocomplete="off" autofocus="true" />
+        <button class="add" type="submit"  name="list">+</button>
+      </form>
+      <p id="instructions">After editing the options, type the question and then select the correct option, click on '+' button to edit the next question. If you are done with all questions,
+        click on the Finish Quiz button.
+      </p>
+      <div class="container">
+        <form action="/finish" method="get">
+          <button class="next" id="finish" type="Submit">Finish Quiz</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function handler(index) {
+        document.getElementById("title" + index).setAttribute("hidden", true)
+        document.getElementById("edit" + index).setAttribute("hidden", true)
+        document.getElementById("done" + index).removeAttribute("hidden")
+        document.getElementById("input" + index).removeAttribute("hidden")
+      }
+
+    </script>
+
+  </main>
+<footer>Copyright © <%= new Date().getFullYear() %></footer>
+</body>
+
+</html>
